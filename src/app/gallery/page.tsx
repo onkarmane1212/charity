@@ -5,12 +5,22 @@ import Image from 'next/image';
 
 // Sample gallery images
 const galleryImages = [
-  { id: 1, src: '/images/gallery/1.jpg', alt: 'Community event', category: 'events', type: 'image' },
-  { id: 2, src: '/images/gallery/2.jpg', alt: 'Education program', category: 'programs', type: 'image' },
-  { id: 3, src: '/images/gallery/3.jpg', alt: 'Volunteers at work', category: 'volunteers', type: 'image' },
-  { id: 4, src: '/images/gallery/4.jpg', alt: 'Children learning', category: 'programs', type: 'image' },
-  { id: 5, src: '/images/gallery/5.jpg', alt: 'Fundraising event', category: 'events', type: 'image' },
-  { id: 6, src: '/images/gallery/6.jpg', alt: 'Community outreach', category: 'community', type: 'image' },
+  { id: 1, src: '/gallary/img1.jpg', alt: 'Community event', category: 'events', type: 'image' },
+  { id: 2, src: '/gallary/img2.jpg', alt: 'Education program', category: 'programs', type: 'image' },
+  { id: 3, src: '/gallary/img3.jpg', alt: 'Volunteers at work', category: 'volunteers', type: 'image' },
+  { id: 4, src: '/gallary/img4.jpg', alt: 'Children learning', category: 'programs', type: 'image' },
+  { id: 5, src: '/gallary/img5.jpg', alt: 'Fundraising event', category: 'events', type: 'image' },
+  { id: 6, src: '/gallary/img6.jpg', alt: 'Community outreach', category: 'community', type: 'image' },
+  { id: 7, src: '/gallary/img7.jpg', alt: 'Children learning', category: 'programs', type: 'image' },
+  { id: 8, src: '/gallary/img8.jpg', alt: 'Children learning', category: 'programs', type: 'image' },
+  { id: 9, src: '/gallary/img9.jpg', alt: 'Children learning', category: 'programs', type: 'image' },
+  { id: 10, src: '/gallary/img10.jpg', alt: 'Children learning', category: 'programs', type: 'image' },
+  { id: 11, src: '/gallary/img11.jpg', alt: 'Children learning', category: 'programs', type: 'image' },
+  { id: 12, src: '/gallary/img12.jpg', alt: 'Children learning', category: 'programs', type: 'image' },
+  { id: 13, src: '/gallary/img13.jpg', alt: 'Children learning', category: 'programs', type: 'image' },
+  { id: 14, src: '/gallary/img14.jpg', alt: 'Children learning', category: 'programs', type: 'image' },
+  { id: 15, src: '/gallary/img15.jpg', alt: 'Children learning', category: 'programs', type: 'image' },
+  { id: 16, src: '/gallary/img16.jpg', alt: 'Children learning', category: 'programs', type: 'image' },
 ];
 
 // Sample videos
@@ -18,27 +28,19 @@ const galleryVideos = [
   { 
     id: 'v1', 
     title: 'Annual Charity Event 2023', 
-    thumbnail: '/images/gallery/video1.jpg',
-    embedUrl: 'https://www.youtube.com/embed/example1',
+    videoUrl: '/videos/video1.mp4',
+    poster: '/img1.jpg',
     category: 'events',
     type: 'video'
   },
   { 
     id: 'v2', 
     title: 'Education Program Highlights', 
-    thumbnail: '/images/gallery/video2.jpg',
-    embedUrl: 'https://www.youtube.com/embed/example2',
+    videoUrl: '/videos/video2.mp4',
+    poster: '/img2.jpg',
     category: 'programs',
     type: 'video'
-  },
-  { 
-    id: 'v3', 
-    title: 'Volunteer Stories', 
-    thumbnail: '/images/gallery/video3.jpg',
-    embedUrl: 'https://www.youtube.com/embed/example3',
-    category: 'volunteers',
-    type: 'video'
-  },
+  }
 ];
 
 export default function GalleryPage() {
@@ -46,8 +48,8 @@ export default function GalleryPage() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<{src: string, alt: string} | null>(null);
 
-  const openVideoModal = (embedUrl: string) => {
-    setSelectedVideo(embedUrl);
+  const openVideoModal = (videoUrl: string) => {
+    setSelectedVideo(videoUrl);
   };
 
   const openImageModal = (src: string, alt: string) => {
@@ -108,7 +110,7 @@ export default function GalleryPage() {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      className="object-cover"
+                      className="object-contain"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   </div>
@@ -130,16 +132,31 @@ export default function GalleryPage() {
               <div 
                 key={video.id} 
                 className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-                onClick={() => openVideoModal(video.embedUrl)}
+                onClick={() => openVideoModal(video.videoUrl)}
               >
-                <div className="aspect-w-16 aspect-h-9 w-full">
-                  <div className="w-full h-64 bg-gray-200 relative">
-                    <div className="absolute inset-0 flex items-center justify-center">
+                <div className="aspect-w-16 aspect-h-9 w-full bg-gray-200 relative overflow-hidden">
+                  {video.poster ? (
+                    <Image
+                      src={video.poster}
+                      alt={video.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-300 flex items-center justify-center">
                       <div className="w-16 h-16 bg-emerald-600 bg-opacity-80 rounded-full flex items-center justify-center">
                         <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
                         </svg>
                       </div>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:bg-opacity-10 transition-all duration-300">
+                    <div className="w-16 h-16 bg-emerald-600 bg-opacity-80 rounded-full flex items-center justify-center transform hover:scale-110 transition-transform">
+                      <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                      </svg>
                     </div>
                   </div>
                 </div>
@@ -164,15 +181,15 @@ export default function GalleryPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              <div className="aspect-w-16 aspect-h-9 w-full">
-                <iframe
+              <div className="w-full max-w-4xl">
+                <video 
+                  className="w-full max-h-[80vh]" 
+                  controls 
+                  autoPlay 
                   src={selectedVideo}
-                  className="w-full h-[70vh]"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title="Video player"
-                />
+                >
+                  Your browser does not support the video tag.
+                </video>
               </div>
             </div>
           </div>

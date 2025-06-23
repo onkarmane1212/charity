@@ -46,7 +46,7 @@ export default function AboutPage() {
 
         <section>
           <h2 className="text-2xl font-semibold mb-4">२. आरोग्य आणि स्वच्छता: </h2>
-          <div className='flex justify-center gap-4'>
+          <div className='flex justify-between gap-1'>
            
             <div className="flex flex-col items-center">
 <p>
@@ -58,7 +58,7 @@ export default function AboutPage() {
 </ol>
             </div>
             <div className="flex flex-col items-center">
-              <img src="" alt="" />
+              <img src="/img2.jpg" className="w-full h-48 object-cover mb-4" alt="" />
             </div>
           </div>
         </section>
